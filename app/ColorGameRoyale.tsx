@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+console.log('ColorGameRoyale module loaded')
 import type { GameState, Champion, Color } from '@/types/gameTypes';
 import type { SaveData } from '@/utils/saveSystem';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -58,6 +59,7 @@ const INITIAL_STATE: GameState = {
 };
 
 export default function ColorGameRoyale() {
+  console.log('ColorGameRoyale render')
   const [gameState, setGameState] = useState<GameState>(INITIAL_STATE);
   const [saveData, setSaveData] = useState<SaveData | null>(null);
   const timerRef = useRef<number | null>(null);

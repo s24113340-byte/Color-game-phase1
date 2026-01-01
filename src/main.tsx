@@ -4,6 +4,7 @@ import ColorGameRoyale from '../app/ColorGameRoyale'
 import './styles.css'
 
 const root = createRoot(document.getElementById('root')!)
+console.log('main.tsx loaded')
 // Global error handlers to surface runtime issues as a visible overlay
 function showFatalError(message: string) {
   try {
