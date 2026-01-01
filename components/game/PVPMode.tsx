@@ -10,8 +10,6 @@ type PVPModeProps = {
   colors: Color[];
 };
 
-export default function PVPMode({ onBack, colors }: PVPModeProps) {
-
 const INTERFERENCE_ATTACKS = {
   freeze: { name: 'Freeze Turn', icon: Snowflake, cost: 30, color: '#3B82F6' },
   drain: { name: 'Score Drain', icon: Skull, cost: 50, color: '#A855F7' },
@@ -37,9 +35,10 @@ export default function PVPMode({ onBack, colors }) {
 
   const playSound = useCallback((type) => {
     if (!audioRef.current) {
-      audioRef.current = new (window.AudioContext || window.webkitAudioContext)();
+      const AudioCtor: any = (window as any).AudioContext || (window as any).webkitAudioContext;
+      audioRef.current = new AudioCtor();
     }
-    const ctx = audioRef.current;
+    const ctx = audioRef.current as AudioContext;
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
     osc.connect(gain);

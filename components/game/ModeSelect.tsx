@@ -8,8 +8,6 @@ type ModeSelectProps = {
   hasCampaignSave: boolean;
 };
 
-export default function ModeSelect({ onSelectMode, onBack, hasCampaignSave }: ModeSelectProps) {
-
 const MODES = [
   {
     id: 'normal',

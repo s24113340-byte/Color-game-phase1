@@ -13,9 +13,6 @@ type ChampionUpgradesProps = {
   onSave: () => void;
 };
 
-export default function ChampionUpgrades({ champion, upgrades, upgradePoints, onUpgrade, onBack, onSave }: ChampionUpgradesProps) {
-  const [selectedStat, setSelectedStat] = useState<string | null>(null);
-
 const UPGRADES = {
   power: {
     name: 'Power',

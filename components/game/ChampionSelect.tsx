@@ -9,10 +9,6 @@ type ChampionSelectProps = {
   championUpgrades?: Record<string, Record<string, number>>;
 };
 
-export default function ChampionSelect({ onSelect, onBack, championUpgrades = {} }: ChampionSelectProps) {
-  const [hoveredChampion, setHoveredChampion] = useState<string | null>(null);
-  const [selectedChampion, setSelectedChampion] = useState<string | null>(null);
-
 const CHAMPIONS = [
   {
     id: 'ren',

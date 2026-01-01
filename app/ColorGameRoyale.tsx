@@ -75,9 +75,10 @@ export default function ColorGameRoyale() {
 
   const playSound = useCallback((type: string) => {
     if (!audioContextRef.current) {
-      audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)();
+      const AudioCtor: any = (window as any).AudioContext || (window as any).webkitAudioContext;
+      audioContextRef.current = new AudioCtor();
     }
-    const ctx = audioContextRef.current;
+    const ctx = audioContextRef.current as AudioContext;
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
     osc.connect(gain);
@@ -118,7 +119,7 @@ export default function ColorGameRoyale() {
   // Type annotate key functions (minimal typing to ease tsc errors)
   const placeBetTyped = (colorId: string, amount: number) => placeBet(colorId, amount);
 
-  const determineEnding = (state) => {
+  const determineEnding = (state: GameState): string => {
     // Win if shadow meter is depleted OR score is high enough
     const isVictory = state.shadowMeter <= 0 || state.score >= 500;
     
@@ -135,14 +136,14 @@ export default function ColorGameRoyale() {
     }
     
     if (isVictory) {
-      const dominant = Object.entries(state.elementalBalance)
+      const dominant = (Object.entries(state.elementalBalance) as [string, number][])
         .sort((a, b) => b[1] - a[1])[0][0];
       return dominant;
     }
     return 'chaos';
   };
 
-  const selectChampion = (champion) => {
+  const selectChampion = (champion: Champion) => {
     const championWithUpgrades = getChampionWithUpgrades(champion);
     setGameState(prev => ({
       ...prev,
@@ -194,19 +195,19 @@ export default function ColorGameRoyale() {
     saveGame(newSave);
   };
 
-  const getChampionWithUpgrades = (champion) => {
+  const getChampionWithUpgrades = (champion: Champion | null): Champion | null => {
     if (!champion || !saveData) return champion;
-    
+
     const upgrades = saveData.championUpgrades[champion.id] || {};
-    const upgradedStats = { ...champion.stats };
-    
+    const upgradedStats: { [k: string]: number } = { ...champion.stats };
+
     Object.entries(upgrades).forEach(([stat, level]) => {
-      upgradedStats[stat] = (upgradedStats[stat] || 0) + level * 5;
+      upgradedStats[stat] = (upgradedStats[stat] || 0) + (level as number) * 5;
     });
-    
+
     return {
       ...champion,
-      stats: upgradedStats,
+      stats: upgradedStats as Champion['stats'],
       upgrades,
     };
   };
