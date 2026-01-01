@@ -24,7 +24,13 @@ type CampaignMapProps = {
 };
 
 export default function CampaignMap({ progress, onSelectLevel, onBack, onUpgrades }: CampaignMapProps) {
-  const [selectedLevel, setSelectedLevel] = useState<{ id: number; name: string } | null>(null);
+  const [selectedLevel, setSelectedLevel] = useState<{
+    id: number;
+    name: string;
+    difficulty?: string;
+    boss?: string | null;
+    color?: string;
+  } | null>(null);
   const highestUnlocked = progress.highestLevelUnlocked || 1;
 
   const getLevelStatus = (levelId) => {
