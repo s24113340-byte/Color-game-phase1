@@ -72,7 +72,7 @@ export default function EndingCinematic({ ending, score, champion, onRestart }) 
     >
       {/* Animated background particles */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        {[...Array(30)].map((_, i) => (
+        {typeof window !== 'undefined' && [...Array(30)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-2 h-2 rounded-full"

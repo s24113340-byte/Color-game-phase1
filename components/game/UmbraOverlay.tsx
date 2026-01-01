@@ -203,7 +203,7 @@ export default function UmbraOverlay({ active, ability, shadowMeter, rageMode, f
       </AnimatePresence>
 
       {/* Ambient shadow particles when Umbra is strong */}
-      {shadowMeter > 50 && (
+      {shadowMeter > 50 && typeof window !== 'undefined' && (
         <div className="fixed inset-0 pointer-events-none z-20">
           {[...Array(5)].map((_, i) => (
             <motion.div

@@ -12,7 +12,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
   "include": ["app", "components", "game", "utils", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules", "dist"]
