@@ -257,4 +257,26 @@ export default function EndingCinematic({ ending, score, champion, onRestart }: 
                             ? 'fill-yellow-400 text-yellow-400'
                             : 'text-slate-600'
                         }`}
- 
+                      />
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Restart button */}
+      <motion.button
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: phase === 'stats' ? 0.5 : 0 }}
+        onClick={onRestart}
+        className="fixed bottom-8 px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl font-bold text-white hover:shadow-lg hover:shadow-purple-500/50 transition-shadow"
+      >
+        Play Again
+      </motion.button>
+    </motion.div>
+  );
+}
