@@ -146,7 +146,9 @@ export default function ColorGameRoyale() {
   };
 
   const selectChampion = (champion: Champion) => {
+    console.log('selectChampion:', champion.name);
     const championWithUpgrades = getChampionWithUpgrades(champion);
+    console.log('transitioning to playing phase');
     setGameState(prev => ({
       ...prev,
       champion: championWithUpgrades,
@@ -163,24 +165,33 @@ export default function ColorGameRoyale() {
     }));
   };
 
-  const selectMode = (mode) => {
-    setGameState(prev => ({
-      ...prev,
-      gameMode: mode,
-      phase: mode === 'pvp' ? 'pvp' : mode === 'normal' ? 'campaign-map' : 'champion-select',
-      timer: mode === 'time-attack' ? 30 : 60,
-      maxRounds: mode === 'time-attack' ? 999 : 10,
-    }));
+  const selectMode = (mode: string) => {
+    console.log('selectMode:', mode);
+    setGameState(prev => {
+      const newPhase = mode === 'pvp' ? 'pvp' : mode === 'normal' ? 'campaign-map' : 'champion-select';
+      console.log('transitioning to phase:', newPhase);
+      return {
+        ...prev,
+        gameMode: mode,
+        phase: newPhase,
+        timer: mode === 'time-attack' ? 30 : 60,
+        maxRounds: mode === 'time-attack' ? 999 : 10,
+      };
+    });
   };
 
-  const selectCampaignLevel = (levelId) => {
-    setGameState(prev => ({
-      ...prev,
-      selectedLevel: levelId,
-      phase: 'champion-select',
-      maxRounds: 10, // Campaign has 10 rounds per level
-      coins: 500, // Starting coins
-    }));
+  const selectCampaignLevel = (levelId: number) => {
+    console.log('selectCampaignLevel:', levelId);
+    setGameState(prev => {
+      console.log('transitioning to champion-select');
+      return {
+        ...prev,
+        selectedLevel: levelId,
+        phase: 'champion-select',
+        maxRounds: 10,
+        coins: 500,
+      };
+    });
   };
 
   const handleSaveProgress = () => {
