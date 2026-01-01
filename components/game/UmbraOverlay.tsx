@@ -41,7 +41,15 @@ const UMBRA_ABILITIES = {
   },
 };
 
-export default function UmbraOverlay({ active, ability, shadowMeter, rageMode, finalBoss }) {
+type UmbraOverlayProps = {
+  active: boolean;
+  ability: string | null;
+  shadowMeter: number;
+  rageMode: boolean;
+  finalBoss: boolean;
+};
+
+export default function UmbraOverlay({ active, ability, shadowMeter, rageMode, finalBoss }: UmbraOverlayProps) {
   const abilityData = ability ? UMBRA_ABILITIES[ability] : null;
 
   return (

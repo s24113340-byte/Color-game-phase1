@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import type { GameState, Champion, Color } from '@/types/gameTypes';
+import type { SaveData } from '@/utils/saveSystem';
 import { motion, AnimatePresence } from 'framer-motion';
 import ChampionSelect from '@/components/game/ChampionSelect';
 import CampaignMap from '@/components/game/CampaignMap';
@@ -21,7 +23,7 @@ const COLORS = [
   { id: 'yellow', name: 'Light', hex: '#FBBF24', faction: 'light', emoji: '✨' },
 ];
 
-const INITIAL_STATE = {
+const INITIAL_STATE: GameState = {
   phase: 'title', // title, mode-select, campaign-map, upgrades, champion-select, playing, ending
   gameMode: null, // normal, time-attack, pvp
   champion: null,
@@ -56,10 +58,10 @@ const INITIAL_STATE = {
 };
 
 export default function ColorGameRoyale() {
-  const [gameState, setGameState] = useState(INITIAL_STATE);
-  const [saveData, setSaveData] = useState(null);
-  const timerRef = useRef(null);
-  const audioContextRef = useRef(null);
+  const [gameState, setGameState] = useState<GameState>(INITIAL_STATE);
+  const [saveData, setSaveData] = useState<SaveData | null>(null);
+  const timerRef = useRef<number | null>(null);
+  const audioContextRef = useRef<AudioContext | null>(null);
 
   // Load save data on mount
   useEffect(() => {
@@ -71,7 +73,7 @@ export default function ColorGameRoyale() {
     }
   }, []);
 
-  const playSound = useCallback((type) => {
+  const playSound = useCallback((type: string) => {
     if (!audioContextRef.current) {
       audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)();
     }
@@ -112,6 +114,9 @@ export default function ColorGameRoyale() {
     }
     return () => clearInterval(timerRef.current);
   }, [gameState.phase, gameState.frozen, gameState.isDropping, gameState.isPaused]);
+
+  // Type annotate key functions (minimal typing to ease tsc errors)
+  const placeBetTyped = (colorId: string, amount: number) => placeBet(colorId, amount);
 
   const determineEnding = (state) => {
     // Win if shadow meter is depleted OR score is high enough

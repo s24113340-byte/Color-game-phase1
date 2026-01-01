@@ -2,6 +2,19 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, TrendingUp, Shield, Zap, Star, Plus, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import type { Champion } from '@/types/gameTypes';
+
+type ChampionUpgradesProps = {
+  champion: Champion;
+  upgrades: Record<string, number>;
+  upgradePoints: number;
+  onUpgrade: (stat: string, cost: number) => void;
+  onBack: () => void;
+  onSave: () => void;
+};
+
+export default function ChampionUpgrades({ champion, upgrades, upgradePoints, onUpgrade, onBack, onSave }: ChampionUpgradesProps) {
+  const [selectedStat, setSelectedStat] = useState<string | null>(null);
 
 const UPGRADES = {
   power: {

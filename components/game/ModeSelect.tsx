@@ -2,6 +2,14 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Swords, Clock, Users, ArrowLeft, Shield, Zap, Trophy } from 'lucide-react';
 
+type ModeSelectProps = {
+  onSelectMode: (mode: string) => void;
+  onBack: () => void;
+  hasCampaignSave: boolean;
+};
+
+export default function ModeSelect({ onSelectMode, onBack, hasCampaignSave }: ModeSelectProps) {
+
 const MODES = [
   {
     id: 'normal',

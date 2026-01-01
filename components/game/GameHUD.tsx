@@ -1,8 +1,14 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Timer, Coins, Trophy, Flame, Droplets, Leaf, Sun, Zap, Target, Shield } from 'lucide-react';
+import type { GameState } from '@/types/gameTypes';
 
-export default function GameHUD({ gameState, colors }) {
+type GameHUDProps = {
+  gameState: GameState;
+  colors: any[];
+};
+
+export default function GameHUD({ gameState, colors }: GameHUDProps) {
   const {
     score,
     coins,
@@ -18,14 +24,14 @@ export default function GameHUD({ gameState, colors }) {
     gameMode,
   } = gameState;
 
-  const factionIcons = {
+  const factionIcons: Record<string, any> = {
     fire: Flame,
     water: Droplets,
     nature: Leaf,
     light: Sun,
   };
 
-  const factionColors = {
+  const factionColors: Record<string, string> = {
     fire: '#FF3B3B',
     water: '#3B82F6',
     nature: '#10B981',

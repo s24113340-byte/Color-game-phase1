@@ -16,8 +16,15 @@ const CAMPAIGN_LEVELS = [
   { id: 10, name: 'Final Confrontation', difficulty: 'Legendary', boss: 'UMBRA THE CHROMATIC SHADOW', color: '#8B5CF6' },
 ];
 
-export default function CampaignMap({ progress, onSelectLevel, onBack, onUpgrades }) {
-  const [selectedLevel, setSelectedLevel] = useState(null);
+type CampaignMapProps = {
+  progress: { highestLevelUnlocked: number; completedLevels: number[]; upgradePoints: number; totalScore: number };
+  onSelectLevel: (levelId: number) => void;
+  onBack: () => void;
+  onUpgrades: () => void;
+};
+
+export default function CampaignMap({ progress, onSelectLevel, onBack, onUpgrades }: CampaignMapProps) {
+  const [selectedLevel, setSelectedLevel] = useState<{ id: number; name: string } | null>(null);
   const highestUnlocked = progress.highestLevelUnlocked || 1;
 
   const getLevelStatus = (levelId) => {

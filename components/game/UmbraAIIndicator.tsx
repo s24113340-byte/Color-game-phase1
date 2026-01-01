@@ -2,7 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Brain, Target, Zap, TrendingUp } from 'lucide-react';
 
-export default function UmbraAIIndicator({ gameState }) {
+import type { GameState } from '@/types/gameTypes';
+
+type UmbraAIIndicatorProps = { gameState: GameState };
+
+export default function UmbraAIIndicator({ gameState }: UmbraAIIndicatorProps) {
   if (!gameState.champion || gameState.gameMode !== 'normal') return null;
 
   const { champion, score, streak, shadowMeter, elementalBalance } = gameState;

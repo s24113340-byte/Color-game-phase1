@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Sword, Sparkles, Shield, Wand2, ArrowLeft, Star } from 'lucide-react';
+import type { Champion } from '@/types/gameTypes';
+
+type ChampionSelectProps = {
+  onSelect: (champion: Champion) => void;
+  onBack: () => void;
+  championUpgrades?: Record<string, Record<string, number>>;
+};
+
+export default function ChampionSelect({ onSelect, onBack, championUpgrades = {} }: ChampionSelectProps) {
+  const [hoveredChampion, setHoveredChampion] = useState<string | null>(null);
+  const [selectedChampion, setSelectedChampion] = useState<string | null>(null);
 
 const CHAMPIONS = [
   {

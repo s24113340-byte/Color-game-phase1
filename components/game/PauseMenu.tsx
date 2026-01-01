@@ -1,7 +1,18 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function PauseMenu({ isOpen, onResume, onRetry, onEnd, musicOn, soundOn, onToggleMusic, onToggleSound }) {
+type PauseMenuProps = {
+  isOpen: boolean;
+  onResume: () => void;
+  onRetry: () => void;
+  onEnd: () => void;
+  musicOn: boolean;
+  soundOn: boolean;
+  onToggleMusic: () => void;
+  onToggleSound: () => void;
+};
+
+export default function PauseMenu({ isOpen, onResume, onRetry, onEnd, musicOn, soundOn, onToggleMusic, onToggleSound }: PauseMenuProps) {
   if (!isOpen) return null;
 
   return (

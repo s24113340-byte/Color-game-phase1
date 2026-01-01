@@ -50,8 +50,17 @@ const ENDINGS = {
   },
 };
 
-export default function EndingCinematic({ ending, score, champion, onRestart }) {
-  const [phase, setPhase] = useState('intro');
+import type { Champion } from '@/types/gameTypes';
+
+type EndingCinematicProps = {
+  ending: string;
+  score: number;
+  champion?: Champion | null;
+  onRestart: () => void;
+};
+
+export default function EndingCinematic({ ending, score, champion, onRestart }: EndingCinematicProps) {
+  const [phase, setPhase] = useState<string>('intro');
   const endingData = ENDINGS[ending] || ENDINGS.chaos;
   const isVictory = ending !== 'chaos';
 

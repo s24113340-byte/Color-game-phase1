@@ -3,6 +3,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Zap, Shield, Snowflake, Skull, Trophy, Play, RotateCcw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import PauseMenu from './PauseMenu';
+import type { Color } from '@/types/gameTypes';
+
+type PVPModeProps = {
+  onBack: () => void;
+  colors: Color[];
+};
+
+export default function PVPMode({ onBack, colors }: PVPModeProps) {
 
 const INTERFERENCE_ATTACKS = {
   freeze: { name: 'Freeze Turn', icon: Snowflake, cost: 30, color: '#3B82F6' },

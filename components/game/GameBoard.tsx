@@ -2,9 +2,18 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Minus, Plus, Play, CircleDot } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import type { GameState, Color } from '@/types/gameTypes';
 
-export default function GameBoard({ gameState, colors, onPlaceBet, onDrop, onSkipResults }) {
-  const [betAmount, setBetAmount] = useState(10);
+type GameBoardProps = {
+  gameState: GameState;
+  colors: Color[];
+  onPlaceBet: (colorId: string, amount: number) => void;
+  onDrop: () => void;
+  onSkipResults: () => void;
+};
+
+export default function GameBoard({ gameState, colors, onPlaceBet, onDrop, onSkipResults }: GameBoardProps) {
+  const [betAmount, setBetAmount] = useState<number>(10);
   const { bets, droppedBalls, isDropping, coins, frozen, poisonedSquares, canSkipResults } = gameState;
 
   const adjustBet = (delta) => {
